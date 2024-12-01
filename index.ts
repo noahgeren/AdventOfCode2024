@@ -16,6 +16,15 @@ if (args[0] === "watch") {
   day = +args[0];
 } else {
   day = PromptSync()(`Day [${defaultDay}]: `);
+  day = day && !Number.isNaN(+day) ? +day : defaultDay;
 }
 
-require(`./src/day${day && !Number.isNaN(+day) ? +day : defaultDay}.ts`);
+console.log(`Running Solution for Day ${day}`);
+console.log();
+
+const TIMER_ID = "\nTime";
+console.time(TIMER_ID);
+
+require(`./src/day${day}.ts`);
+
+console.timeEnd(TIMER_ID);
