@@ -25,6 +25,6 @@ console.log();
 const TIMER_ID = "\nTime";
 console.time(TIMER_ID);
 
-require(`./src/day${day}.ts`);
+require(`./days/day${day}.ts`);
 
 console.timeEnd(TIMER_ID);
