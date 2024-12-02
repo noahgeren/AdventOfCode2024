@@ -9,14 +9,14 @@ if (currentDate.getHours() >= 23) {
 
 const defaultDay = +(args[1] ?? currentDate.getDate());
 
-let day: number | string;
+let day: number;
 if (args[0] === "watch") {
   day = defaultDay;
 } else if (args[0] && !Number.isNaN(+args[0])) {
   day = +args[0];
 } else {
-  day = PromptSync()(`Day [${defaultDay}]: `);
-  day = day && !Number.isNaN(+day) ? +day : defaultDay;
+  const input = PromptSync()(`Day [${defaultDay}]: `);
+  day = input && !Number.isNaN(+input) ? +input : defaultDay;
 }
 
 console.log(`Running Solution for Day ${day}`);

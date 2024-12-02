@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "ts-node index.ts",
-    "watch": "nodemon index.ts watch"
+    "watch": "nodemon -e ts,txt,json index.ts watch"
   },
   "author": "noahsgeren@gmail.com",
   "license": "ISC",
