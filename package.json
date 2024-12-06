@@ -2,7 +2,7 @@
   "name": "advent-of-code-2024",
   "version": "1.0.0",
   "description": "Solutions to advent of code 2024.",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "start": "ts-node index.ts",
     "watch": "nodemon -e ts,txt,json index.ts watch"
