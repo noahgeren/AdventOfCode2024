@@ -39,9 +39,7 @@ const canCalculate = (expected: BigNumber, values: BigNumber[]): boolean => {
 
 const getSum = () =>
   data
-    .filter((row) => {
-      return canCalculate(row[0], row[1]);
-    })
+    .filter((row) => canCalculate(row[0], row[1]))
     .reduce((a, b) => a.plus(b[0]), BigNumber(0));
 
 console.log(getSum().toFixed());
