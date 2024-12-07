@@ -26,7 +26,11 @@ const canCalculate = (expected: BigNumber, values: BigNumber[]): boolean => {
   }
   const tail = values.slice(2);
   for (let mod of modifiers) {
-    if (canCalculate(expected, [mod(values[0], values[1]), ...tail])) {
+    const head = mod(values[0], values[1]);
+    if (
+      head.comparedTo(expected) <= 0 &&
+      canCalculate(expected, [head, ...tail])
+    ) {
       return true;
     }
   }
