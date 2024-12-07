@@ -8,11 +8,11 @@ const data = readFileSync("./data/day7.txt")
     let tokens = row.split(":");
     return [
       BigNumber(tokens[0]),
-      ...tokens[1]
+      tokens[1]
         .trim()
         .split(" ")
         .map((n) => BigNumber(n)),
-    ];
+    ] as const;
   });
 
 let modifiers: ((a: BigNumber, b: BigNumber) => BigNumber)[] = [
@@ -40,7 +40,7 @@ const canCalculate = (expected: BigNumber, values: BigNumber[]): boolean => {
 const getSum = () =>
   data
     .filter((row) => {
-      return canCalculate(row[0], row.slice(1));
+      return canCalculate(row[0], row[1]);
     })
     .reduce((a, b) => a.plus(b[0]), BigNumber(0));
 
