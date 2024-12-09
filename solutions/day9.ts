@@ -1,4 +1,3 @@
-// import BigNumber from "bignumber.js";
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
 
