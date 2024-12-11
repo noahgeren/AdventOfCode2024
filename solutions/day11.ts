@@ -10,34 +10,30 @@ const ZERO = BigNumber(0);
 const ONE = BigNumber(1);
 const YEAR = BigNumber(2024);
 
-let maxBlinks = 25;
 const memory: Partial<Record<string, BigNumber>> = {};
-const findLength = (n: BigNumber, blink: number): BigNumber => {
-  if (blink === maxBlinks) {
+const findLength = (n: BigNumber, blinksLeft: number): BigNumber => {
+  if (blinksLeft === 0) {
     return ONE;
   }
   const nStr = n.toFixed();
-  const hash = nStr + ("-" + (maxBlinks - blink));
+  const hash = nStr + ("-" + blinksLeft--);
   if (memory[hash] !== undefined) {
     return memory[hash];
   }
   let result = ONE;
   if (n.isEqualTo(ZERO)) {
-    result = findLength(ONE, blink + 1);
+    result = findLength(ONE, blinksLeft);
   } else if (nStr.length % 2 === 0) {
     result = findLength(
       BigNumber(nStr.substring(0, nStr.length / 2)),
-      blink + 1
-    ).plus(findLength(BigNumber(nStr.substring(nStr.length / 2)), blink + 1));
+      blinksLeft
+    ).plus(findLength(BigNumber(nStr.substring(nStr.length / 2)), blinksLeft));
   } else {
-    result = findLength(n.times(YEAR), blink + 1);
+    result = findLength(n.times(YEAR), blinksLeft);
   }
   memory[hash] = result;
   return result;
 };
 
-console.log(stones.reduce((a, b) => a.plus(findLength(b, 0)), ZERO).toFixed());
-
-maxBlinks = 75;
-
-console.log(stones.reduce((a, b) => a.plus(findLength(b, 0)), ZERO).toFixed());
+console.log(stones.reduce((a, b) => a.plus(findLength(b, 25)), ZERO).toFixed());
+console.log(stones.reduce((a, b) => a.plus(findLength(b, 75)), ZERO).toFixed());
