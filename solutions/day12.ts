@@ -16,6 +16,7 @@ const findPrice = (
 	price: {
 		area: number;
 		perimeter: number;
+		sides: number;
 	}
 ): void => {
 	if (seen.has(hash(x, y)) || data[y]?.[x] !== expected) {
@@ -30,21 +31,38 @@ const findPrice = (
 		(data[y]?.[x - 1] !== expected ? 1 : 0) +
 		(data[y]?.[x + 1] !== expected ? 1 : 0);
 
+	for (let dx = -1; dx <= 1; dx += 2) {
+		for (let dy = -1; dy <= 1; dy += 2) {
+			let count = 0;
+			if (data[y]?.[x + dx] === expected) count++;
+			if (data[y + dy]?.[x] === expected) count++;
+			if (
+				count === 0 ||
+				(count === 2 && data[y + dy]?.[x + dx] !== expected)
+			) {
+				price.sides++;
+			}
+		}
+	}
+
 	findPrice(x, y - 1, expected, price);
 	findPrice(x, y + 1, expected, price);
 	findPrice(x - 1, y, expected, price);
 	findPrice(x + 1, y, expected, price);
 };
-let totalPrice = BigNumber(0);
+let totalPrice = [BigNumber(0), BigNumber(0)];
 
 for (let y = 0; y < data.length; y++) {
 	for (let x = 0; x < data.length; x++) {
-		const price = { area: 0, perimeter: 0 };
+		const price = { area: 0, perimeter: 0, sides: 0 };
 		findPrice(x, y, data[y][x], price);
-		totalPrice = totalPrice.plus(
+		totalPrice[0] = totalPrice[0].plus(
 			BigNumber(price.area).times(price.perimeter)
+		);
+		totalPrice[1] = totalPrice[1].plus(
+			BigNumber(price.area).times(price.sides)
 		);
 	}
 }
 
-console.log(totalPrice.toFixed());
+console.log(totalPrice.map((price) => price.toFixed()).join("\n"));
