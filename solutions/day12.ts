@@ -53,7 +53,7 @@ const findPrice = (
 let totalPrice = [BigNumber(0), BigNumber(0)];
 
 for (let y = 0; y < data.length; y++) {
-	for (let x = 0; x < data.length; x++) {
+	for (let x = 0; x < data[y].length; x++) {
 		const price = { area: 0, perimeter: 0, sides: 0 };
 		findPrice(x, y, data[y][x], price);
 		totalPrice[0] = totalPrice[0].plus(
