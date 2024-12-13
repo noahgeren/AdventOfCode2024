@@ -1,18 +1,16 @@
 import { BigNumber } from "bignumber.js";
 import { readFileSync } from "node:fs";
+import { ZERO } from "../utilities/constants";
 
 let data = readFileSync("./data/day3.txt").toString();
 
 console.log(
 	[...data.matchAll(/mul\((\d+),(\d+)\)/g)]
-		.reduce(
-			(a, b) => a.plus(BigNumber(b.at(1)!).times(+b.at(2)!)),
-			BigNumber(0)
-		)
+		.reduce((a, b) => a.plus(BigNumber(b.at(1)!).times(+b.at(2)!)), ZERO)
 		.toFixed()
 );
 
-let total = BigNumber(0);
+let total = ZERO;
 let enabled = true;
 [...data.matchAll(/(?:mul\((\d+),(\d+)\))|(do\(\))|(don't\(\))/g)].forEach(
 	(m) => {

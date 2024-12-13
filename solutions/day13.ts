@@ -1,6 +1,7 @@
 import BigNumber from "bignumber.js";
 import console from "console";
 import { readFileSync } from "fs";
+import { ZERO } from "../utilities/constants";
 
 const blocks = readFileSync("./data/day13.txt")
 	.toString()
@@ -25,7 +26,6 @@ const blocks = readFileSync("./data/day13.txt")
 	});
 
 const A_PRICE = BigNumber(3),
-	ZERO = BigNumber(0),
 	PRIZE_DIFF = BigNumber("10000000000000");
 
 interface Vector2d {

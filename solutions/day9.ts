@@ -1,5 +1,6 @@
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
+import { ZERO } from "../utilities/constants";
 
 const data = readFileSync("./data/day9.txt")
 	.toString()
@@ -32,7 +33,7 @@ for (let i = 0; i < last; i++) {
 	}
 }
 
-let checksum = BigNumber(0);
+let checksum = ZERO;
 for (let i = 0; i < newBlock.length && newBlock[i] > -1; i++) {
 	checksum = checksum.plus(BigNumber(i).times(newBlock[i]));
 }
@@ -67,7 +68,7 @@ newBlock = files.flatMap((file) =>
 	Array.isArray(file) ? file : Array(file).fill(-1)
 );
 
-checksum = BigNumber(0);
+checksum = ZERO;
 for (let i = 0; i < newBlock.length; i++) {
 	if (newBlock[i] > -1) {
 		checksum = checksum.plus(BigNumber(i).times(newBlock[i]));

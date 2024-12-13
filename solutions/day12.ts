@@ -1,5 +1,6 @@
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
+import { ZERO } from "../utilities/constants";
 
 const data = readFileSync("./data/day12.txt")
 	.toString()
@@ -45,7 +46,7 @@ const findPrice = (
 	findPrice(x + 1, y, expected, price);
 };
 
-let totalPrice = [BigNumber(0), BigNumber(0)];
+let totalPrice = [ZERO, ZERO];
 for (let y = 0; y < data.length; y++) {
 	for (let x = 0; x < data[y].length; x++) {
 		const price = { area: 0, perimeter: 0, sides: 0 };

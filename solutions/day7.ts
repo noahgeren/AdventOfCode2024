@@ -1,5 +1,6 @@
 import { BigNumber } from "bignumber.js";
 import { readFileSync } from "fs";
+import { ZERO } from "../utilities/constants";
 
 const data = readFileSync("./data/day7.txt")
 	.toString()
@@ -40,7 +41,7 @@ const canCalculate = (expected: BigNumber, values: BigNumber[]): boolean => {
 const getSum = () =>
 	data
 		.filter((row) => canCalculate(row[0], row[1]))
-		.reduce((a, b) => a.plus(b[0]), BigNumber(0));
+		.reduce((a, b) => a.plus(b[0]), ZERO);
 
 console.log(getSum().toFixed());
 

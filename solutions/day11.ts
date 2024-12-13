@@ -1,13 +1,12 @@
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
+import { ONE, ZERO } from "../utilities/constants";
 
 let stones = readFileSync("./data/day11.txt")
 	.toString()
 	.split(" ")
 	.map((n) => new BigNumber(n));
 
-const ZERO = BigNumber(0);
-const ONE = BigNumber(1);
 const YEAR = BigNumber(2024);
 
 const memory: Partial<Record<string, BigNumber>> = {};
