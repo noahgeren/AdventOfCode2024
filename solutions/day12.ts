@@ -23,15 +23,10 @@ const findPrice = (
 		return;
 	}
 	seen.add(hash(x, y));
-
 	price.area++;
-	price.perimeter +=
-		(data[y - 1]?.[x] !== expected ? 1 : 0) +
-		(data[y + 1]?.[x] !== expected ? 1 : 0) +
-		(data[y]?.[x - 1] !== expected ? 1 : 0) +
-		(data[y]?.[x + 1] !== expected ? 1 : 0);
-
 	for (let dx = -1; dx <= 1; dx += 2) {
+		if (data[y + dx]?.[x] !== expected) price.perimeter++;
+		if (data[y]?.[x - dx] !== expected) price.perimeter++;
 		for (let dy = -1; dy <= 1; dy += 2) {
 			let count = 0;
 			if (data[y]?.[x + dx] === expected) count++;
@@ -44,14 +39,13 @@ const findPrice = (
 			}
 		}
 	}
-
 	findPrice(x, y - 1, expected, price);
 	findPrice(x, y + 1, expected, price);
 	findPrice(x - 1, y, expected, price);
 	findPrice(x + 1, y, expected, price);
 };
-let totalPrice = [BigNumber(0), BigNumber(0)];
 
+let totalPrice = [BigNumber(0), BigNumber(0)];
 for (let y = 0; y < data.length; y++) {
 	for (let x = 0; x < data[y].length; x++) {
 		const price = { area: 0, perimeter: 0, sides: 0 };
