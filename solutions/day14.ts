@@ -55,3 +55,21 @@ guards.forEach((guard) => {
 });
 
 console.log(counts.reduce((a, b) => a.times(b), BigNumber(1)).toFixed());
+
+const B_ANSWER = 8149; // Found this for my solution by trial and error
+for (let seconds = SECONDS; seconds < B_ANSWER; seconds++) {
+	guards.forEach((guard) => {
+		guard.position.x =
+			(guard.position.x + guard.velocity.x + WIDTH) % WIDTH;
+		guard.position.y =
+			(guard.position.y + guard.velocity.y + HEIGHT) % HEIGHT;
+	});
+}
+
+const grid = [...Array<string[]>(HEIGHT)].map((_) =>
+	Array<string>(WIDTH).fill(" ")
+);
+guards.forEach((guard) => (grid[guard.position.y][guard.position.x] = "*"));
+grid.forEach((row) => {
+	console.log(row.join(""));
+});
