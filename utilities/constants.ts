@@ -2,6 +2,8 @@ import BigNumber from "bignumber.js";
 
 export const ZERO = BigNumber(0);
 export const ONE = BigNumber(1);
+export const TWO = BigNumber(2);
+export const EIGHT = TWO.pow(3);
 export const ONE_THOUSAND = BigNumber("1000");
 
 export interface Vector2d {
@@ -10,7 +12,7 @@ export interface Vector2d {
 }
 
 /**
- * Ordinal clockwise starting from UP
+ * Ordinally clockwise starting from UP=0
  */
 export enum Direction {
 	UP,
@@ -33,3 +35,26 @@ export const moveDirection = (
 	x: coord.x + DIRECTION_MAP[direction].x,
 	y: coord.y + DIRECTION_MAP[direction].y
 });
+
+export const bitwiseXOR = (a: BigNumber, b: BigNumber) => {
+	let aBinary = a.toString(2),
+		bBinary = b.toString(2);
+	if (aBinary.length > bBinary.length) {
+		// pad b
+		bBinary =
+			Array(aBinary.length - bBinary.length)
+				.fill("0")
+				.join("") + bBinary;
+	} else {
+		// pad a
+		aBinary =
+			Array(bBinary.length - aBinary.length)
+				.fill("0")
+				.join("") + aBinary;
+	}
+	const xorBinary: number[] = [];
+	for (let i = 0; i < aBinary.length; i++) {
+		xorBinary.push(+aBinary[i] ^ +bBinary[i]);
+	}
+	return BigNumber(xorBinary.join(""), 2);
+};
