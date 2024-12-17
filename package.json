@@ -3,9 +3,10 @@
 	"version": "1.0.0",
 	"description": "Solutions to advent of code 2024.",
 	"main": "index.js",
+    "type": "module",
 	"scripts": {
-		"start": "ts-node index.ts",
-		"watch": "nodemon -e ts,txt,json index.ts watch",
+		"start": "tsx index.ts",
+		"watch": "tsx watch --include \"./data/*.txt\" index.ts watch",
 		"format": "prettier . --write"
 	},
 	"author": "noahsgeren@gmail.com",
@@ -13,13 +14,13 @@
 	"devDependencies": {
 		"@types/node": "^22.10.1",
 		"@types/prompt-sync": "^4.2.3",
-		"nodemon": "^3.1.7",
 		"prettier": "^3.4.2",
-		"ts-node": "^10.9.2",
+		"tsx": "^4.19.2",
 		"typescript": "^5.7.2"
 	},
 	"dependencies": {
 		"bignumber.js": "^9.1.2",
-		"prompt-sync": "^4.2.0"
+		"prompt-sync": "^4.2.0",
+		"tinyqueue": "^3.0.0"
 	}
 }

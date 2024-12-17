@@ -25,6 +25,6 @@ console.log();
 const TIMER_ID = "\nTime";
 console.time(TIMER_ID);
 
-require(`./solutions/day${day}.ts`);
+await import(`./solutions/day${day}.ts`);
 
 console.timeEnd(TIMER_ID);
