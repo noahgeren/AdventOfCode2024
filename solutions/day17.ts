@@ -104,7 +104,8 @@ for (const num of program) {
 	let found = false;
 	for (
 		let startingA = ZERO;
-		startingA.comparedTo(EIGHT) < 0;
+		;
+		// startingA.comparedTo(EIGHT) < 0;
 		startingA = startingA.plus(ONE)
 	) {
 		registers.A = startingA;

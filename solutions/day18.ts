@@ -23,10 +23,7 @@ const getPathLengthForBytes = (byteLength: number): number => {
 
 	const remainingPositions = new TinyQueue(
 		[{ coord: { x: 0, y: 0 }, total: 0 }],
-		(a, b) => {
-			const diff = a.total - b.total;
-			return diff;
-		}
+		(a, b) => a.total - b.total
 	);
 
 	while (remainingPositions.length) {
