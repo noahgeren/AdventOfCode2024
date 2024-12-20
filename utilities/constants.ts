@@ -1,4 +1,5 @@
 import BigNumber from "bignumber.js";
+import PromptSync from "prompt-sync";
 
 export const ZERO = BigNumber(0);
 export const ONE = BigNumber(1);
@@ -57,4 +58,9 @@ export const bitwiseXOR = (a: BigNumber, b: BigNumber) => {
 		xorBinary.push(+aBinary[i] ^ +bBinary[i]);
 	}
 	return BigNumber(xorBinary.join(""), 2);
+};
+
+const prompt = PromptSync();
+export const pause = (): boolean => {
+	return prompt("press enter to continue: ") === "exit";
 };

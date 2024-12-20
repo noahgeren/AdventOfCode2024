@@ -1,9 +1,7 @@
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
-import PromptSync from "prompt-sync";
 import { Vector2d } from "../utilities/constants";
 
-const prompt = PromptSync();
 const data = readFileSync("./data/day15.txt").toString().split("\n\n");
 const initialMap = data[0].split("\n").map((row) => row.split(""));
 const instructions = data[1].split(/\n|/g) as ("<" | ">" | "^" | "v")[];
@@ -28,7 +26,11 @@ findStartLoop: for (let y = 0; y < initialMap.length; y++) {
 let map = initialMap.map((row) => [...row]);
 let position = { ...initialPosition };
 
-let moveBox = (box: Vector2d, direction: Vector2d): boolean => {
+let moveBox = (
+	box: Vector2d,
+	direction: Vector2d,
+	actuallyMove = true
+): boolean => {
 	if (map[box.y][box.x] === ".") {
 		return true;
 	}
@@ -81,9 +83,9 @@ map = initialMap.map((row) =>
 		.flat()
 );
 
-position = { x: initialPosition.x * 2, y: position.y };
+position = { x: initialPosition.x * 2, y: initialPosition.y };
 
-moveBox = (box, direction): boolean => {
+moveBox = (box, direction, actuallyMove = true): boolean => {
 	if (map[box.y][box.x] === "#") {
 		return false;
 	} else if (map[box.y][box.x] === ".") {
@@ -92,38 +94,56 @@ moveBox = (box, direction): boolean => {
 
 	if (direction.x === 0) {
 		// up/down - [
-		// // TODO: This is working for some edge cases
-		// switch (map[box.y][box.x]) {
-		// case "]":
-		// 	return (
-		// 		moveBox({ x: box.x, y: box.y + direction.y }, direction) &&
-		// 		moveBox({ x: box.x - 1, y: box.y }, direction)
-		// 	);
-		// case "[":
-		// 	if (
-		// 		moveBox(
-		// 			{ x: box.x + 1, y: box.y + direction.y },
-		// 			direction
-		// 		) &&
-		// 		moveBox({ x: box.x, y: box.y + direction.y }, direction)
-		// 	) {
-		// 		map[box.y + direction.y][box.x] = "[";
-		// 		map[box.y + direction.y][box.x + 1] = "]";
-		// 		map[box.y][box.x] = ".";
-		// 		map[box.y][box.x + 1] = ".";
-		// 		return true;
-		// 	}
-		// }
+		switch (map[box.y][box.x]) {
+			case "]":
+				return (
+					moveBox(
+						{ x: box.x, y: box.y + direction.y },
+						direction,
+						actuallyMove
+					) &&
+					moveBox({ x: box.x - 1, y: box.y }, direction, actuallyMove)
+				);
+			case "[":
+				if (
+					moveBox(
+						{ x: box.x + 1, y: box.y + direction.y },
+						direction,
+						actuallyMove
+					) &&
+					moveBox(
+						{ x: box.x, y: box.y + direction.y },
+						direction,
+						actuallyMove
+					)
+				) {
+					if (actuallyMove) {
+						map[box.y + direction.y][box.x] = "[";
+						map[box.y + direction.y][box.x + 1] = "]";
+						map[box.y][box.x] = ".";
+						map[box.y][box.x + 1] = ".";
+					}
+					return true;
+				}
+		}
 	} else if (direction.x > 0) {
 		// right - [
 		switch (map[box.y][box.x]) {
 			case "]":
-				return moveBox({ x: box.x + 1, y: box.y }, direction);
+				return moveBox(
+					{ x: box.x + 1, y: box.y },
+					direction,
+					actuallyMove
+				);
 			case "[":
-				if (moveBox({ x: box.x + 1, y: box.y }, direction)) {
-					map[box.y][box.x + 1] = "[";
-					map[box.y][box.x + 2] = "]";
-					map[box.y][box.x] = ".";
+				if (
+					moveBox({ x: box.x + 1, y: box.y }, direction, actuallyMove)
+				) {
+					if (actuallyMove) {
+						map[box.y][box.x + 1] = "[";
+						map[box.y][box.x + 2] = "]";
+						map[box.y][box.x] = ".";
+					}
 					return true;
 				}
 		}
@@ -131,37 +151,29 @@ moveBox = (box, direction): boolean => {
 		// left - ]
 		switch (map[box.y][box.x]) {
 			case "]":
-				if (moveBox({ x: box.x - 1, y: box.y }, direction)) {
-					map[box.y][box.x - 1] = "]";
-					map[box.y][box.x - 2] = "[";
-					map[box.y][box.x] = ".";
+				if (
+					moveBox({ x: box.x - 1, y: box.y }, direction, actuallyMove)
+				) {
+					if (actuallyMove) {
+						map[box.y][box.x - 1] = "]";
+						map[box.y][box.x - 2] = "[";
+						map[box.y][box.x] = ".";
+					}
 					return true;
 				}
 				break;
 			case "[":
-				return moveBox({ x: box.x - 1, y: box.y }, direction);
+				return moveBox(
+					{ x: box.x - 1, y: box.y },
+					direction,
+					actuallyMove
+				);
 		}
 	}
 	return false;
 };
 
-// map[position.y][position.x] = "@";
-// console.log(map.map((row) => row.join("")).join("\n"));
-// map[position.y][position.x] = ".";
-// prompt("press enter to continue: ");
-
-for (const [idx, inst] of instructions.entries()) {
-	// if (idx > 1380) {
-	// 	process.stdout.write("\x1Bc");
-	// 	map[position.y][position.x] = "@";
-	// 	console.log(`${inst} (${idx} / ${instructions.length})`);
-	// 	console.log(map.map((row) => row.join("")).join("\n"));
-	// 	map[position.y][position.x] = ".";
-	// 	await setTimeout(150);
-	// 	if (prompt("press enter to continue: ") === "exit") {
-	// 		break;
-	// 	}
-	// }
+for (const inst of instructions) {
 	const direction = DIRECTIONS[inst];
 	const newPosition = {
 		x: position.x + direction.x,
@@ -173,7 +185,8 @@ for (const [idx, inst] of instructions.entries()) {
 		case "#":
 			continue;
 	}
-	if (moveBox(newPosition, direction)) {
+	if (moveBox(newPosition, direction, false)) {
+		moveBox(newPosition, direction);
 		position = newPosition;
 	}
 }
