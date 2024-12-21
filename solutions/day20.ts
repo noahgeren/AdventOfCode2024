@@ -22,20 +22,20 @@ for (let y = 0; y < map.length; y++) {
 	}
 }
 
-const solveMaze = (): number => {
+const solveMaze = (): Vector2d[] => {
 	const seen = new HashSet<Vector2d>(
 		(coord) => coord.y * map[0].length + coord.x
 	);
 
 	const remainingPositions = new TinyQueue(
-		[{ coord: { ...start }, length: 0 }],
-		(a, b) => a.length - b.length
+		[{ coord: { ...start }, path: [{ ...start }] as Vector2d[] }],
+		(a, b) => a.path.length - b.path.length
 	);
 
 	while (remainingPositions.length) {
-		const { coord, length } = remainingPositions.pop()!;
+		const { coord, path } = remainingPositions.pop()!;
 		if (coord.x === end.x && coord.y === end.y) {
-			return length;
+			return path;
 		}
 		for (const direction of Object.values(DIRECTION_MAP)) {
 			const newCoord = {
@@ -53,32 +53,33 @@ const solveMaze = (): number => {
 				continue;
 			}
 			seen.add(newCoord);
-			remainingPositions.push({ coord: newCoord, length: length + 1 });
+			remainingPositions.push({
+				coord: newCoord,
+				path: [...path, newCoord]
+			});
 		}
 	}
 
-	return -1;
+	return [];
 };
 
-const baseLength = solveMaze();
+const path = solveMaze();
 
-let count = 0;
-for (let y = 0; y < map.length - 1; y++) {
-	for (let x = 0; x < map[y].length - 1; x++) {
-		if (map[y][x] === ".") {
-			continue;
+const countCheats = (cheatTime: number): number => {
+	let count = 0;
+	for (let i = 0; i < path.length - 1; i++) {
+		for (let j = i + 1; j < path.length; j++) {
+			const distance =
+				Math.abs(path[i].x - path[j].x) +
+				Math.abs(path[i].y - path[j].y);
+			if (distance <= cheatTime && j - i - distance >= 100) {
+				console.log;
+				count++;
+			}
 		}
-		map[y][x] = ".";
-		let newLength = solveMaze();
-		if (newLength <= baseLength - 100) {
-			count++;
-		}
-		map[y][x] = "#";
 	}
-}
+	return count;
+};
 
-console.log(count);
-
-// TODO: Rework this to 2 loops over each position on the original solution
-//          - checking if they are correct distance apart
-//          - check distance that is skipped
+console.log(countCheats(2));
+console.log(countCheats(20));
