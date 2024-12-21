@@ -95,22 +95,13 @@ while (true) {
 	instructions[program[instructionPointer]]();
 }
 
-let idealAs: BigNumber[] = [];
-registers.B = ZERO;
-registers.C = ZERO;
-for (const num of program) {
-	const startingB = registers.B,
-		startingC = registers.C;
-	let found = false;
-	for (
-		let startingA = ZERO;
-		;
-		// startingA.comparedTo(EIGHT) < 0;
-		startingA = startingA.plus(ONE)
-	) {
-		registers.A = startingA;
-		registers.B = startingB;
-		registers.C = startingC;
+const findIdealA = (A: BigNumber, stillNeeded: number[]): BigNumber | false => {
+	if (!stillNeeded.length) {
+		return A;
+	}
+	const lookingFor = BigNumber(stillNeeded.pop()!);
+	for (let i = ZERO; i.isLessThan(EIGHT); i = i.plus(ONE)) {
+		registers.A = A.times(EIGHT).plus(i);
 		for (
 			instructionPointer = 0;
 			instructionPointer < program.length - 4;
@@ -118,18 +109,14 @@ for (const num of program) {
 		) {
 			instructions[program[instructionPointer]]();
 		}
-		if (registers.B.isEqualTo(num)) {
-			found = true;
-			idealAs.push(startingA);
-			break;
+		if (registers.B.mod(EIGHT).isEqualTo(lookingFor)) {
+			const idealA = findIdealA(A.times(EIGHT).plus(i), [...stillNeeded]);
+			if (idealA) {
+				return idealA;
+			}
 		}
 	}
-	if (!found) {
-		console.log(startingB, startingC);
-		console.log(num);
-	}
-}
+	return false;
+};
 
-console.log(idealAs.join(","));
-
-console.log(idealAs.reverse().reduce((a, b) => a.times(EIGHT).plus(b), ZERO));
+console.log(findIdealA(ZERO, [...program]));
