@@ -1,5 +1,6 @@
 import { readFileSync } from "fs";
 import HashSet from "../utilities/HashSet";
+import { intersection } from "../utilities/constants";
 
 const connections = readFileSync("./data/day23.txt")
 	.toString()
@@ -14,11 +15,9 @@ connections.forEach(([a, b]) => {
 	multiconnections[b].push(a);
 });
 
+// triples are best
 const triples = new HashSet<string[]>((key) => key.sort().join());
 for (const [first, nextConnections] of Object.entries(multiconnections)) {
-	if (!first.startsWith("t")) {
-		continue;
-	}
 	for (const second of nextConnections) {
 		for (const third of multiconnections[second]) {
 			if (first === third || !nextConnections.includes(third)) {
@@ -28,4 +27,30 @@ for (const [first, nextConnections] of Object.entries(multiconnections)) {
 		}
 	}
 }
-console.log(triples.size);
+console.log(
+	[...triples].filter((triplet) =>
+		triplet.some((comp) => comp.startsWith("t"))
+	).length
+);
+
+const groups = [...triples];
+let again = true;
+while (again) {
+	again = false;
+	for (const group of groups) {
+		const newAdditions = intersection(
+			...group.map((comp) => multiconnections[comp])
+		);
+		if (newAdditions.length) {
+			again = true;
+			group.push(newAdditions[0]);
+		}
+	}
+}
+
+console.log(
+	groups
+		.sort((a, b) => b.length - a.length)[0]
+		.sort()
+		.join()
+);

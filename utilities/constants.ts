@@ -64,3 +64,13 @@ const prompt = PromptSync();
 export const pause = (): boolean => {
 	return prompt("press enter to continue: ") === "exit";
 };
+
+export const intersection = <T>(xs?: T[], ys?: T[], ...rest: T[][]): T[] =>
+	xs === undefined
+		? []
+		: ys === undefined
+			? xs
+			: intersection(
+					xs.filter((x) => ys.some((y) => y === x)),
+					...rest
+				);
