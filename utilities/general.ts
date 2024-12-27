@@ -1,4 +1,5 @@
 import BigNumber from "bignumber.js";
+import { readFileSync } from "node:fs";
 import PromptSync from "prompt-sync";
 
 export const prompt = PromptSync();
@@ -38,3 +39,6 @@ export const intersection = <T>(xs?: T[], ys?: T[], ...rest: T[][]): T[] =>
 					xs.filter((x) => ys.some((y) => y === x)),
 					...rest
 				);
+
+export const readInputFile = (year: number, day: number) =>
+	readFileSync(`./data/${year}/day${day}.txt`).toString();
