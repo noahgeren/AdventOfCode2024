@@ -1,15 +1,9 @@
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
 import TinyQueue from "tinyqueue";
-import {
-	Direction,
-	moveDirection,
-	ONE,
-	ONE_THOUSAND,
-	Vector2d,
-	ZERO
-} from "../../utilities/constants";
-import HashSet from "../../utilities/HashSet";
+import { ONE, ZERO } from "../../utilities/constants";
+import { Direction, moveDirection, Vector2d } from "../../utilities/matrix";
+import HashSet from "../../utilities/structures/HashSet";
 
 const map = readFileSync("./data/2024/day16.txt")
 	.toString()
@@ -58,6 +52,7 @@ let remainingPositions = new TinyQueue<PositionTotal>(
 	(a, b) => a.total.comparedTo(b.total)
 );
 
+const ONE_THOUSAND = BigNumber("1000");
 let minimumScore = BigNumber(map.length * map[0].length).times(ONE_THOUSAND);
 while (remainingPositions.length) {
 	const { position, total, history } = remainingPositions.pop()!;

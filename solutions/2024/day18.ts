@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import TinyQueue from "tinyqueue";
-import { DIRECTION_MAP, Vector2d } from "../../utilities/constants";
-import HashSet from "../../utilities/HashSet";
+import { DIRECTION_MAP, Vector2d } from "../../utilities/matrix";
+import HashSet from "../../utilities/structures/HashSet";
 
 const SIZE = 71;
 const BYTE_COUNT = 1024;

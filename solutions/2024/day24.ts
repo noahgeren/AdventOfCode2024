@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
-import { bitwiseXOR, TWO, ZERO } from "../../utilities/constants";
+import { TWO, ZERO } from "../../utilities/constants";
+import { bitwiseXOR } from "../../utilities/general";
 
 const data = readFileSync("./data/2024/day24.txt").toString().split("\n\n");
 

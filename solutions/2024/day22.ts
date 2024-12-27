@@ -1,7 +1,8 @@
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
-import { bitwiseXOR, TWO, ZERO } from "../../utilities/constants";
-import HashMap from "../../utilities/HashMap";
+import { TWO, ZERO } from "../../utilities/constants";
+import { bitwiseXOR } from "../../utilities/general";
+import HashMap from "../../utilities/structures/HashMap";
 
 const ITERATIONS = 2000;
 const MODULUS = BigNumber("16777216");

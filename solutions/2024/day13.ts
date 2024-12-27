@@ -2,6 +2,7 @@ import BigNumber from "bignumber.js";
 import console from "console";
 import { readFileSync } from "fs";
 import { ZERO } from "../../utilities/constants";
+import { Vector2d } from "../../utilities/matrix";
 
 const blocks = readFileSync("./data/2024/day13.txt")
 	.toString()
@@ -28,11 +29,11 @@ const blocks = readFileSync("./data/2024/day13.txt")
 const A_PRICE = BigNumber(3),
 	PRIZE_DIFF = BigNumber("10000000000000");
 
-interface Vector2d {
-	x: BigNumber;
-	y: BigNumber;
-}
-const findTokensToWin = (a: Vector2d, b: Vector2d, p: Vector2d): BigNumber => {
+const findTokensToWin = (
+	a: Vector2d<BigNumber>,
+	b: Vector2d<BigNumber>,
+	p: Vector2d<BigNumber>
+): BigNumber => {
 	const bN = a.x.times(p.y).minus(a.y.times(p.x)),
 		bD = a.x.times(b.y).minus(a.y.times(b.x));
 	if (!bN.mod(bD).isZero()) {

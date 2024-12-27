@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
-import { Vector2d } from "../../utilities/constants";
+import { Vector2d } from "../../utilities/matrix";
 
 const data = readFileSync("./data/2024/day15.txt").toString().split("\n\n");
 const initialMap = data[0].split("\n").map((row) => row.split(""));
