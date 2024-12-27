@@ -1,6 +1,6 @@
+import { TWO, ZERO } from "#/utilities/constants";
+import { bitwiseXOR } from "#/utilities/general";
 import { readFileSync } from "node:fs";
-import { TWO, ZERO } from "../../utilities/constants";
-import { bitwiseXOR } from "../../utilities/general";
 
 const data = readFileSync("./data/2024/day24.txt").toString().split("\n\n");
 
@@ -75,9 +75,7 @@ console.log("Part 1: " + fromBinary("z", defaultValues));
 // TODO: Update `swappedWires` as you find them
 const swappedWires: [string, string][] = [];
 if (!swappedWires.length) {
-	console.log(
-		"\nSolve part 2 by finding irregularities in the text above and below"
-	);
+	console.log("\nSolve part 2 by finding irregularities in the text below");
 }
 swappedWires.forEach(([a, b]) => {
 	const aFormula = formulas.find((f) => f.c === a)!;

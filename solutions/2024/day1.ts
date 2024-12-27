@@ -1,5 +1,5 @@
+import { ZERO } from "#/utilities/constants";
 import { readFileSync } from "node:fs";
-import { ZERO } from "../../utilities/constants";
 
 let data = readFileSync("./data/2024/day1.txt")
 	.toString()

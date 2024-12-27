@@ -9,6 +9,9 @@
 		"watch": "tsx watch --include \"./data/*/*.txt\" index.ts watch",
 		"format": "prettier . --write"
 	},
+    "imports": {
+        "#/*": "./*"
+    },
 	"author": "noahsgeren@gmail.com",
 	"license": "ISC",
 	"devDependencies": {

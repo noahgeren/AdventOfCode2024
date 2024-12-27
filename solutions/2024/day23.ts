@@ -1,6 +1,6 @@
+import { intersection } from "#/utilities/general";
+import HashSet from "#/utilities/structures/HashSet";
 import { readFileSync } from "fs";
-import { intersection } from "../../utilities/general";
-import HashSet from "../../utilities/structures/HashSet";
 
 const connections = readFileSync("./data/2024/day23.txt")
 	.toString()

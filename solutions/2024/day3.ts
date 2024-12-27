@@ -1,6 +1,6 @@
+import { ZERO } from "#/utilities/constants";
 import { BigNumber } from "bignumber.js";
 import { readFileSync } from "node:fs";
-import { ZERO } from "../../utilities/constants";
 
 let data = readFileSync("./data/2024/day3.txt").toString();
 

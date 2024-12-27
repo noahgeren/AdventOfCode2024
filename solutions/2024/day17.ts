@@ -1,7 +1,7 @@
+import { ONE, TWO, ZERO } from "#/utilities/constants";
+import { bitwiseXOR } from "#/utilities/general";
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
-import { ONE, TWO, ZERO } from "../../utilities/constants";
-import { bitwiseXOR } from "../../utilities/general";
 
 const data = readFileSync("./data/2024/day17.txt").toString().split("\n");
 

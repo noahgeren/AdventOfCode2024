@@ -1,7 +1,7 @@
+import { ONE, ZERO } from "#/utilities/constants";
+import HashMap from "#/utilities/structures/HashMap";
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
-import { ONE, ZERO } from "../../utilities/constants";
-import HashMap from "../../utilities/structures/HashMap";
 
 // Must format each input file line as CODE-NUMERIC_INSTRUCTIONS
 // NUMERIC_INSTRUCTION needs to be found manually

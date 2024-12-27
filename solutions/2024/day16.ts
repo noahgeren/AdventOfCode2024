@@ -1,9 +1,9 @@
+import { ONE, ZERO } from "#/utilities/constants";
+import { Direction, moveDirection, Vector2d } from "#/utilities/matrix";
+import HashSet from "#/utilities/structures/HashSet";
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
 import TinyQueue from "tinyqueue";
-import { ONE, ZERO } from "../../utilities/constants";
-import { Direction, moveDirection, Vector2d } from "../../utilities/matrix";
-import HashSet from "../../utilities/structures/HashSet";
 
 const map = readFileSync("./data/2024/day16.txt")
 	.toString()

@@ -1,8 +1,8 @@
+import { ZERO } from "#/utilities/constants";
+import { Vector2d } from "#/utilities/matrix";
 import BigNumber from "bignumber.js";
 import console from "console";
 import { readFileSync } from "fs";
-import { ZERO } from "../../utilities/constants";
-import { Vector2d } from "../../utilities/matrix";
 
 const blocks = readFileSync("./data/2024/day13.txt")
 	.toString()

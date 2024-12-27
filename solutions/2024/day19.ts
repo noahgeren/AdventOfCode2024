@@ -1,6 +1,6 @@
+import { ONE, ZERO } from "#/utilities/constants";
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
-import { ONE, ZERO } from "../../utilities/constants";
 
 const patternsWanted = readFileSync("./data/2024/day19.txt")
 	.toString()
