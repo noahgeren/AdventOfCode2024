@@ -1,12 +1,12 @@
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
-import { ONE, ZERO } from "../utilities/constants";
-import HashMap from "../utilities/HashMap";
+import { ONE, ZERO } from "../../utilities/constants";
+import HashMap from "../../utilities/HashMap";
 
 // Must format each input file line as CODE-NUMERIC_INSTRUCTIONS
 // NUMERIC_INSTRUCTION needs to be found manually
 // ex: 459A-^^<<A>A^>AvvvA
-const data = readFileSync("./data/day21.txt")
+const data = readFileSync("./data/2024/day21.txt")
 	.toString()
 	.split("\n")
 	.map((line) => line.split("-"));

@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 
-const lines = readFileSync("./data/day5.txt").toString().split("\n");
+const lines = readFileSync("./data/2024/day5.txt").toString().split("\n");
 
 const rules: Partial<Record<number, number[]>> = {};
 const updates: number[][] = [];

@@ -1,8 +1,8 @@
 import { readFileSync } from "fs";
-import HashSet from "../utilities/HashSet";
-import { intersection } from "../utilities/constants";
+import HashSet from "../../utilities/HashSet";
+import { intersection } from "../../utilities/constants";
 
-const connections = readFileSync("./data/day23.txt")
+const connections = readFileSync("./data/2024/day23.txt")
 	.toString()
 	.split("\n")
 	.map((row) => row.split("-") as [string, string]);

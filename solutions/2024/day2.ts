@@ -1,7 +1,7 @@
 // import { BigNumber } from "bignumber.js";
 import { readFileSync } from "node:fs";
 
-let data = readFileSync("./data/day2.txt")
+let data = readFileSync("./data/2024/day2.txt")
 	.toString()
 	.split("\n")
 	.map((row) => row.split(" ").map((n) => +n));

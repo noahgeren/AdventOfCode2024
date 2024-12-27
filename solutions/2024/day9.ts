@@ -1,8 +1,8 @@
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
-import { ZERO } from "../utilities/constants";
+import { ZERO } from "../../utilities/constants";
 
-const data = readFileSync("./data/day9.txt")
+const data = readFileSync("./data/2024/day9.txt")
 	.toString()
 	.split("")
 	.map((n) => +n);

@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
 
-const guards = readFileSync("./data/day14.txt")
+const guards = readFileSync("./data/2024/day14.txt")
 	.toString()
 	.split("\n")
 	.map((line) => {

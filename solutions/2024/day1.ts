@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
-import { ZERO } from "../utilities/constants";
+import { ZERO } from "../../utilities/constants";
 
-let data = readFileSync("./data/day1.txt")
+let data = readFileSync("./data/2024/day1.txt")
 	.toString()
 	.split("\n")
 	.map((row) => row.split(/\s+/).map((n) => +n));

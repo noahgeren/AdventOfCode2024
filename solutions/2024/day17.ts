@@ -1,8 +1,8 @@
 import BigNumber from "bignumber.js";
 import { readFileSync } from "fs";
-import { bitwiseXOR, EIGHT, ONE, TWO, ZERO } from "../utilities/constants";
+import { bitwiseXOR, EIGHT, ONE, TWO, ZERO } from "../../utilities/constants";
 
-const data = readFileSync("./data/day17.txt").toString().split("\n");
+const data = readFileSync("./data/2024/day17.txt").toString().split("\n");
 
 const registers = {
 	A: BigNumber(data[0].split(": ")[1]),

@@ -1,11 +1,11 @@
 import { readFileSync } from "fs";
 import TinyQueue from "tinyqueue";
-import { DIRECTION_MAP, Vector2d } from "../utilities/constants";
-import HashSet from "../utilities/HashSet";
+import { DIRECTION_MAP, Vector2d } from "../../utilities/constants";
+import HashSet from "../../utilities/HashSet";
 
 const SIZE = 71;
 const BYTE_COUNT = 1024;
-const incomingBytes: Vector2d[] = readFileSync("./data/day18.txt")
+const incomingBytes: Vector2d[] = readFileSync("./data/2024/day18.txt")
 	.toString()
 	.split("\n")
 	.map((row) => {

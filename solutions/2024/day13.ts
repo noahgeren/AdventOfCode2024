@@ -1,9 +1,9 @@
 import BigNumber from "bignumber.js";
 import console from "console";
 import { readFileSync } from "fs";
-import { ZERO } from "../utilities/constants";
+import { ZERO } from "../../utilities/constants";
 
-const blocks = readFileSync("./data/day13.txt")
+const blocks = readFileSync("./data/2024/day13.txt")
 	.toString()
 	.split("\n\n")
 	.map((block) => {

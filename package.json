@@ -1,12 +1,12 @@
 {
-	"name": "advent-of-code-2024",
+	"name": "advent-of-code",
 	"version": "1.0.0",
-	"description": "Solutions to advent of code 2024.",
+	"description": "Solutions to advent of code.",
 	"main": "index.js",
     "type": "module",
 	"scripts": {
 		"start": "tsx index.ts",
-		"watch": "tsx watch --include \"./data/*.txt\" index.ts watch",
+		"watch": "tsx watch --include \"./data/*/*.txt\" index.ts watch",
 		"format": "prettier . --write"
 	},
 	"author": "noahsgeren@gmail.com",

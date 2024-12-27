@@ -1,5 +1,3 @@
-import PromptSync from "prompt-sync";
-
 const args: (string | undefined)[] = process.argv.slice(2);
 
 const currentDate = new Date();
@@ -7,24 +5,29 @@ if (currentDate.getHours() >= 23) {
 	currentDate.setHours(currentDate.getHours() + 1);
 }
 
-const defaultDay = +(args[1] ?? currentDate.getDate());
-
-let day: number;
+let year = currentDate.getFullYear();
+let day = Math.min(currentDate.getDate(), 25);
 if (args[0] === "watch") {
-	day = defaultDay;
-} else if (args[0] && !Number.isNaN(+args[0])) {
-	day = +args[0];
-} else {
-	const input = PromptSync()(`Day [${defaultDay}]: `);
-	day = input && !Number.isNaN(+input) ? +input : defaultDay;
+	args.shift();
 }
-
-console.log(`Running Solution for Day ${day}`);
+if (args[0] && args[1]) {
+	year = +args[0];
+	day = +args[1];
+} else if (args[0]) {
+	if (args[0].includes("-")) {
+		[year, day] = args[0].split("-").map((s) => +s);
+	} else {
+		day = +args[0];
+	}
+}
+console.log(`Running Solution for Day ${day} of ${year}`);
 console.log();
 
 const TIMER_ID = "\nTime";
 console.time(TIMER_ID);
 
-await import(`./solutions/day${day}.ts`);
+await import(`./solutions/${year}/day${day}.ts`);
 
 console.timeEnd(TIMER_ID);
+
+export {};

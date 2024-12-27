@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
-import { bitwiseXOR, TWO, ZERO } from "../utilities/constants";
+import { bitwiseXOR, TWO, ZERO } from "../../utilities/constants";
 
-const data = readFileSync("./data/day24.txt").toString().split("\n\n");
+const data = readFileSync("./data/2024/day24.txt").toString().split("\n\n");
 
 const initialValues: Partial<Record<string, boolean>> = {};
 

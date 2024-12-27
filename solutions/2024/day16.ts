@@ -8,10 +8,10 @@ import {
 	ONE_THOUSAND,
 	Vector2d,
 	ZERO
-} from "../utilities/constants";
-import HashSet from "../utilities/HashSet";
+} from "../../utilities/constants";
+import HashSet from "../../utilities/HashSet";
 
-const map = readFileSync("./data/day16.txt")
+const map = readFileSync("./data/2024/day16.txt")
 	.toString()
 	.split("\n")
 	.map((row) => row.split(""));

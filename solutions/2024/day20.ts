@@ -1,9 +1,9 @@
 import { readFileSync } from "fs";
 import TinyQueue from "tinyqueue";
-import { DIRECTION_MAP, Vector2d } from "../utilities/constants";
-import HashSet from "../utilities/HashSet";
+import { DIRECTION_MAP, Vector2d } from "../../utilities/constants";
+import HashSet from "../../utilities/HashSet";
 
-const map = readFileSync("./data/day20.txt")
+const map = readFileSync("./data/2024/day20.txt")
 	.toString()
 	.split("\n")
 	.map((row) => row.split(""));
