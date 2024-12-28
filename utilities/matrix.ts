@@ -21,9 +21,23 @@ export const DIRECTION_MAP = {
 } as const;
 
 export const moveDirection = (
-	coord: Vector2d,
+	coord: Vector2d<number>,
 	direction: Direction
 ): Vector2d => ({
 	x: coord.x + DIRECTION_MAP[direction].x,
 	y: coord.y + DIRECTION_MAP[direction].y
 });
+
+export const inBounds = (
+	coord: Vector2d<number>,
+	matrix: unknown[][]
+): boolean =>
+	coord.y >= 0 &&
+	coord.y < matrix.length &&
+	coord.x >= 0 &&
+	coord.x < matrix[coord.y].length;
+
+export const getPositionHashFunction =
+	(matrix: unknown[][]): ((coord: Vector2d<number>) => number) =>
+	(coord) =>
+		coord.y * matrix[coord.y].length + coord.x;
