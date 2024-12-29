@@ -42,3 +42,7 @@ export const intersection = <T>(xs?: T[], ys?: T[], ...rest: T[][]): T[] =>
 
 export const readInputFile = (year: number, day: number) =>
 	readFileSync(`./data/${year}/day${day}.txt`).toString();
+
+// TODO:
+//  - Helper function to sum values in array
+//  - Update number based helpers to work with BigNumber
