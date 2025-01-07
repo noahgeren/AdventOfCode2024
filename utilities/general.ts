@@ -6,6 +6,9 @@ export const prompt = PromptSync();
 export const pause = (): boolean => {
 	return prompt("press enter to continue: ") === "exit";
 };
+export const clear = (): void => {
+	process.stdout.write("\x1Bc");
+};
 
 export const bitwiseXOR = (a: BigNumber, b: BigNumber) => {
 	let aBinary = a.toString(2),

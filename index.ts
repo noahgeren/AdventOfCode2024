@@ -6,6 +6,9 @@ if (currentDate.getHours() >= 23) {
 }
 
 let year = currentDate.getFullYear();
+if (currentDate.getMonth() < 10) {
+	year--;
+}
 let day = Math.min(currentDate.getDate(), 25);
 if (args[0] === "watch") {
 	args.shift();

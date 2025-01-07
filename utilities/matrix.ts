@@ -13,6 +13,12 @@ export enum Direction {
 	LEFT
 }
 
+export const DIRECTIONS = [
+	Direction.UP,
+	Direction.RIGHT,
+	Direction.DOWN,
+	Direction.LEFT
+];
 export const DIRECTION_MAP = {
 	[Direction.UP]: { x: 0, y: -1 },
 	[Direction.RIGHT]: { x: 1, y: 0 },
@@ -41,3 +47,19 @@ export const getPositionHashFunction =
 	(matrix: unknown[][]): ((coord: Vector2d<number>) => number) =>
 	(coord) =>
 		coord.y * matrix[coord.y].length + coord.x;
+
+export const printMatrix = (
+	matrix: string[][],
+	overwriteFn?: (coord: Vector2d, value: string) => string | undefined
+): void => {
+	for (let y = 0; y < matrix.length; y++) {
+		console.log(
+			matrix[y]
+				.map(
+					(cell, x) =>
+						(overwriteFn && overwriteFn({ x, y }, cell)) || cell
+				)
+				.join("")
+		);
+	}
+};
